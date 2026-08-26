@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phillbert Vaustino | Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;600;700&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,sans-serif;color:#173b68;
+  background:linear-gradient(#58baf2,#dff6ff);
+  overflow-x:hidden
+}
+body.dark{background:linear-gradient(#071a2d,#102d48);color:#e9f5ff}
+body.dark .card,body.dark .paper,body.dark .skillbox{background:#142d46;color:#e9f5ff}
+body.dark .muted{color:#abc5dc}
+
+nav{
+ position:fixed;top:0;width:100%;z-index:20;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:18px 7%;background:#ffffffc9;backdrop-filter:blur(12px)
+}
+.logo{font:700 30px Fredoka;color:#15549a;text-decoration:none}
+.logo span{color:#f3c52e}
+nav a{margin:0 10px;text-decoration:none;color:#173b68;font-weight:600}
+.toggle{border:0;background:white;border-radius:50%;width:40px;height:40px;cursor:pointer}
+
+.cloud{
+ position:fixed;background:white;border-radius:100px;opacity:.5;
+ filter:blur(5px);z-index:-1
+}
+.c1{width:350px;height:100px;top:20%;left:-100px}
+.c2{width:400px;height:120px;top:65%;right:-120px}
+
+section{width:min(1100px,90%);margin:auto;padding:110px 0 60px}
+
+.hero{
+ min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
+ align-items:center;gap:50px;padding-top:130px
+}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:3px;color:#2376c2}
+h1{
+ font:700 clamp(60px,9vw,120px)/.82 Fredoka;
+ color:#164c88;margin:20px 0
+}
+h1 span{color:#f1bd29}
+.hero p{font-size:18px;line-height:1.7;color:#527494;max-width:550px}
+.buttons{display:flex;gap:12px;margin-top:30px}
+.btn{
+ padding:14px 22px;border-radius:14px;text-decoration:none;
+ font-weight:700;border:2px solid #15549a
+}
+.primary{background:#15549a;color:white}
+.secondary{background:white;color:#15549a}
+
+.profile{position:relative;display:flex;justify-content:center}
+.paper{
+ width:min(400px,85vw);padding:18px;background:#fffdf5;
+ box-shadow:0 25px 50px #164d7630;transform:rotate(2deg);
+ border:7px solid #f5df87;position:relative
+}
+.paper img{width:100%;display:block}
+.pin{
+ position:absolute;width:55px;height:55px;border-radius:50%;
+ background:#ed2939;top:5%;left:10%;z-index:2;
+ box-shadow:inset -8px -8px 10px #7b000044
+}
+.smile{
+ position:absolute;left:-50px;top:27%;
+ width:90px;height:90px;border-radius:50%;
+ background:#ffd82d;border:6px solid #2364aa;
+ display:grid;place-items:center;font-size:55px;color:#111
+}
+
+.title{
+ display:flex;align-items:center;gap:15px;margin-bottom:30px
+}
+.title span{color:#efbd28;font-weight:700}
+h2{font:700 48px Fredoka}
+
+.card{
+ background:#fffdf5;border-radius:22px;padding:35px;
+ box-shadow:0 18px 40px #174b7320
+}
+.about{display:grid;grid-template-columns:1.4fr .6fr;gap:25px}
+.note{background:#fff0a3;transform:rotate(-1deg)}
+.label{
+ display:inline-block;background:#15549a;color:white;
+ padding:8px 14px;border-radius:10px;font-weight:700;font-size:13px
+}
+.note p{font-size:18px;line-height:1.8;margin-top:20px}
+.quote{font:600 25px/1.5 Fredoka}
+
+.achievements{display:grid;gap:15px}
+.achievement{
+ border:0;width:100%;text-align:left;padding:25px;
+ background:white;border-radius:18px;cursor:pointer;
+ display:flex;align-items:center;gap:20px;
+ box-shadow:0 15px 35px #174b7320;transition:.25s;color:#173b68
+}
+.achievement:hover{transform:translateX(8px)}
+.num{font:700 25px Fredoka;color:#efbd28}
+.achievement h3{font-size:17px}
+.achievement p{margin-top:5px;color:#66819b}
+
+.skills{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+.skill-list{display:flex;flex-wrap:wrap;gap:12px}
+.skill{
+ padding:13px 18px;border-radius:50px;border:2px solid #afd0ec;
+ background:white;color:#173b68;font-weight:700;cursor:pointer
+}
+.skill.active,.skill:hover{background:#15549a;color:white}
+.skillbox h3{font:700 32px Fredoka;margin:15px 0}
+.skillbox p{line-height:1.7;color:#66819b}
+.bar{height:9px;background:#dfedf8;border-radius:20px;margin-top:20px;overflow:hidden}
+.bar span{display:block;height:100%;width:82%;background:#f1bd29;transition:.5s}
+
+.timeline{border-left:4px solid #9bc7e8;padding-left:30px}
+.timeline .card{margin-bottom:18px;position:relative}
+.timeline .card:before{
+ content:"";position:absolute;left:-43px;top:30px;
+ width:16px;height:16px;border-radius:50%;background:#f1bd29;
+ border:4px solid white
+}
+
+.contact{
+ background:#15549a;color:white;border-radius:25px;
+ padding:50px;display:flex;justify-content:space-between;
+ align-items:center;gap:20px
+}
+.contact h2{margin:10px 0}
+.contact p{color:#d8ecff;line-height:1.6}
+.contact .btn{background:white;color:#15549a;border-color:white}
+
+footer{
+ width:90%;max-width:1100px;margin:auto;padding:30px 0 50px;
+ display:flex;justify-content:space-between;color:#5c7895;font-size:13px
+}
+
+.modal{
+ position:fixed;inset:0;background:#092b48aa;backdrop-filter:blur(8px);
+ display:grid;place-items:center;padding:20px;
+ opacity:0;pointer-events:none;transition:.2s;z-index:100
+}
+.modal.show{opacity:1;pointer-events:auto}
+.modal-box{
+ background:#fffdf5;padding:40px;border-radius:25px;
+ max-width:500px;width:100%;position:relative
+}
+.modal-box h2{font-size:35px;margin:15px 0}
+.close{
+ position:absolute;right:15px;top:10px;border:0;background:none;
+ font-size:30px;cursor:pointer
+}
+
+.reveal{opacity:0;transform:translateY(30px);transition:.7s}
+.reveal.show{opacity:1;transform:none}
+
+@media(max-width:750px){
+ nav nav{display:none}
+ .hero{grid-template-columns:1fr;text-align:center}
+ .hero p{margin:auto}
+ .buttons{justify-content:center}
+ .about,.skills{grid-template-columns:1fr}
+ .contact,footer{flex-direction:column;align-items:flex-start}
+ h2{font-size:38px}
+ .smile{left:-15px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="cloud c1"></div>
+<div class="cloud c2"></div>
+
+<nav>
+<a class="logo" href="#home">PV<span>.</span></a>
+<div>
+<a href="#about">About</a>
+<a href="#achievement">Achievement</a>
+<a href="#skills">Skills</a>
+<a href="#education">Education</a>
+</div>
+<button class="toggle" id="theme">☾</button>
+</nav>
+
+<section class="hero reveal" id="home">
+<div>
+<div class="eyebrow">WELCOME TO MY PORTFOLIO</div>
+<h1>Phillbert<br><span>Vaustino</span></h1>
+<p>
+Student, logical thinker, gamer, and technology enthusiast.
+Welcome to my personal portfolio.
+</p>
+<div class="buttons">
+<a class="btn primary" href="#achievement">Achievements ↓</a>
+<a class="btn secondary" href="#contact">Contact</a>
+</div>
+</div>
+
+<div class="profile">
+<div class="pin"></div>
+<div class="paper">
+<img src="assets/profile-photo.png" alt="Phillbert Vaustino">
+<div class="smile">☺</div>
+</div>
+</div>
+</section>
+
+<section id="about" class="reveal">
+<div class="title"><span>01</span><h2>About Me</h2></div>
+<div class="about">
+<div class="card note">
+<span class="label">ABOUT</span>
+<p>
+Siswa di SMP BPK Penabur Holis. Memiliki kelebihan
+di bidang logika seperti matematika dan fisika,
+serta memiliki minat pada gaming dan teknologi.
+</p>
+</div>
+<div class="card quote">
+✦<br>
+"Keep learning,<br>
+keep experimenting,<br>
+keep improving."
+</div>
+</div>
+</section>
+
+<section id="achievement" class="reveal">
+<div class="title"><span>02</span><h2>Achievements</h2></div>
+
+<div class="achievements">
+
+<button class="achievement"
+data-title="Turnamen Mobile Legend"
+data-detail="Juara 2 Turnamen Mobile Legend Bina Bakti 2026.">
+<span class="num">01</span>
+<div><h3>Turnamen Mobile Legend</h3><p>Juara 2 · 2026</p></div>
+</button>
+
+<button class="achievement"
+data-title="IKMC Math Competition"
+data-detail="Bronze Medal IKMC Math Competition 2023–2024.">
+<span class="num">02</span>
+<div><h3>IKMC Math Competition</h3><p>Bronze Medal · 2023–2024</p></div>
+</button>
+
+<button class="achievement"
+data-title="IKMC Math Competition"
+data-detail="Silver Medal IKMC Math Competition 2025–2026.">
+<span class="num">03</span>
+<div><h3>IKMC Math Competition</h3><p>Silver Medal · 2025–2026</p></div>
+</button>
+
+</div>
+</section>
+
+<section id="skills" class="reveal">
+<div class="title"><span>03</span><h2>Skills</h2></div>
+
+<div class="skills">
+<div class="skill-list">
+<button class="skill active" data-name="Logical Thinking" data-progress="82">Logical Thinking</button>
+<button class="skill" data-name="Math" data-progress="88">Math</button>
+<button class="skill" data-name="Gaming" data-progress="84">Gaming</button>
+<button class="skill" data-name="Technical" data-progress="78">Technical</button>
+<button class="skill" data-name="Perakitan" data-progress="74">Perakitan</button>
+<button class="skill" data-name="Troubleshooting" data-progress="80">Troubleshooting</button>
+</div>
+
+<div class="card skillbox">
+<span class="label">SELECTED SKILL</span>
+<h3 id="skillName">Logical Thinking</h3>
+<p id="skillDesc">
+Kemampuan memecahkan masalah dengan pola dan langkah
+penyelesaian secara sistematis.
+</p>
+<div class="bar"><span id="progress"></span></div>
+</div>
+</div>
+</section>
+
+<section id="education" class="reveal">
+<div class="title"><span>04</span><h2>Education</h2></div>
+
+<div class="timeline">
+<div class="card">
+<strong>2023</strong>
+<h3>SD — Holy Kids</h3>
+<p class="muted">Lulusan SD Holy Kids</p>
+</div>
+
+<div class="card">
+<strong>2026</strong>
+<h3>SMP — BPK Penabur Holis</h3>
+<p class="muted">Lulusan SMP BPK Penabur Holis</p>
+</div>
+</div>
+</section>
+
+<section id="contact" class="contact reveal">
+<div>
+<div class="eyebrow" style="color:#ffe36b">LET'S CONNECT</div>
+<h2>Have a question?</h2>
+<p>Hubungi saya melalui email untuk pertanyaan atau kolaborasi.</p>
+</div>
+<a class="btn" href="mailto:your-email@example.com">Send Email ↗</a>
+</section>
+
+<footer>
+<span>© <span id="year"></span> Phillbert Vaustino</span>
+<span>HTML · CSS · JavaScript</span>
+</footer>
+
+<div class="modal" id="modal">
+<div class="modal-box">
+<button class="close" id="close">×</button>
+<span class="label">ACHIEVEMENT</span>
+<h2 id="modalTitle"></h2>
+<p id="modalDetail"></p>
+</div>
+</div>
+
+<script>
+document.getElementById("year").textContent=new Date().getFullYear();
+
+const theme=document.getElementById("theme");
+theme.onclick=()=>{
+ document.body.classList.toggle("dark");
+ theme.textContent=document.body.classList.contains("dark")?"☀":"☾";
+};
+
+const skills=document.querySelectorAll(".skill");
+const skillName=document.getElementById("skillName");
+const skillDesc=document.getElementById("skillDesc");
+const progress=document.getElementById("progress");
+
+const descriptions={
+ "Logical Thinking":"Kemampuan memecahkan masalah dengan pola dan langkah penyelesaian secara sistematis.",
+ "Math":"Kemampuan dan ketertarikan dalam matematika serta pemecahan soal.",
+ "Gaming":"Strategi, teamwork, dan pemahaman mekanik dalam game.",
+ "Technical":"Ketertarikan pada hardware, software, dan teknologi.",
+ "Perakitan":"Kemampuan dasar merakit dan memahami komponen perangkat.",
+ "Troubleshooting":"Mencari penyebab masalah dan menguji solusi secara sistematis."
+};
+
+skills.forEach(s=>{
+ s.onclick=()=>{
+  skills.forEach(x=>x.classList.remove("active"));
+  s.classList.add("active");
+  skillName.textContent=s.dataset.name;
+  skillDesc.textContent=descriptions[s.dataset.name];
+  progress.style.width=s.dataset.progress+"%";
+ };
+});
+
+const modal=document.getElementById("modal");
+
+document.querySelectorAll(".achievement").forEach(a=>{
+ a.onclick=()=>{
+  document.getElementById("modalTitle").textContent=a.dataset.title;
+  document.getElementById("modalDetail").textContent=a.dataset.detail;
+  modal.classList.add("show");
+ };
+});
+
+document.getElementById("close").onclick=()=>modal.classList.remove("show");
+modal.onclick=e=>{
+ if(e.target===modal)modal.classList.remove("show");
+};
+
+const observer=new IntersectionObserver(entries=>{
+ entries.forEach(e=>{
+  if(e.isIntersecting)e.target.classList.add("show");
+ });
+},{threshold:.12});
+
+document.querySelectorAll(".reveal").forEach(x=>observer.observe(x));
+</script>
+
+</body>
+</html>
