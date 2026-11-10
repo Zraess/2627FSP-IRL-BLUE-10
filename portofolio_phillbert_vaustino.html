@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phillbert Vaustino - Personal Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col justify-between">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 transform translate-y-20 opacity-0 transition-all duration-300 z-50 bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-4 py-3 rounded-xl shadow-lg flex items-center space-x-3 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-emerald-500"></i>
+        <span id="toast-message" class="text-sm font-medium">Teks berhasil disalin!</span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-white/70 dark:bg-slate-950/70 border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-black text-sm">PV</span>
+                <span>Phillbert</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#about" class="text-slate-600 hover:text-emerald-600 dark:text-slate-400 dark:hover:text-emerald-400 transition-colors">Tentang</a>
+                <a href="#achievements" class="text-slate-600 hover:text-emerald-600 dark:text-slate-400 dark:hover:text-emerald-400 transition-colors">Prestasi</a>
+                <a href="#skills" class="text-slate-600 hover:text-emerald-600 dark:text-slate-400 dark:hover:text-emerald-400 transition-colors">Keahlian</a>
+                <a href="#education" class="text-slate-600 hover:text-emerald-600 dark:text-slate-400 dark:hover:text-emerald-400 transition-colors">Pendidikan</a>
+                <a href="#contact" class="text-slate-600 hover:text-emerald-600 dark:text-slate-400 dark:hover:text-emerald-400 transition-colors">Kontak</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" aria-label="Toggle Theme" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500/50">
+                    <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-slate-700 hidden"></i>
+                    <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-amber-400"></i>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 focus:outline-none">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2 border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md">
+            <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900">Tentang</a>
+            <a href="#achievements" class="mobile-nav-link block px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900">Prestasi</a>
+            <a href="#skills" class="mobile-nav-link block px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900">Keahlian</a>
+            <a href="#education" class="mobile-nav-link block px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900">Pendidikan</a>
+            <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900">Kontak</a>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20 py-12 flex-grow">
+
+        <!-- Hero & About Section -->
+        <section id="about" class="pt-4 scroll-mt-24">
+            <div class="flex flex-col md:flex-row gap-8 items-start justify-between">
+                <div class="space-y-6 max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-semibold tracking-wide uppercase">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Pelajar & Esports Enthusiast
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                            Phillbert Vaustino
+                        </h1>
+                        <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                            Siswa SMP BPK Penabur Holis dengan minat tinggi pada pelajaran logika (Matematika & Fisika), perakitan & pemecahan masalah perangkat keras, serta kompetisi gaming.
+                        </p>
+                    </div>
+
+                    <!-- Quick Bio Highlights -->
+                    <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-sm space-y-3">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-brain text-emerald-500 mt-1"></i>
+                            <p class="text-sm text-slate-600 dark:text-slate-300">
+                                Memiliki kelebihan utama di mata pelajaran bernalar seperti <strong class="text-slate-900 dark:text-white">Matematika</strong> dan <strong class="text-slate-900 dark:text-white">Fisika</strong> dengan catatan nilai rata-rata yang lumayan bagus.
+                            </p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-gamepad text-emerald-500 mt-1"></i>
+                            <p class="text-sm text-slate-600 dark:text-slate-300">
+                                Memiliki keahlian dan bakat kompetitif di bidang game serta minat kuat pada aspek teknis komputer.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <a href="#contact" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm transition-all shadow-lg shadow-emerald-500/20 active:scale-95 flex items-center gap-2">
+                            <i class="fa-solid fa-envelope"></i> Hubungi Saya
+                        </a>
+                        <button onclick="copyToClipboard('Phillbertv2@gmail.com', 'Email disalin!')" class="px-5 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-medium text-sm transition-all active:scale-95 flex items-center gap-2">
+                            <i class="fa-regular fa-copy"></i> Salin Email
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Profile Badge / Avatar Card -->
+                <div class="w-full md:w-auto flex-shrink-0 flex justify-center">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-300"></div>
+                        <div class="relative p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 w-full max-w-xs space-y-4 text-center">
+                            <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-tr from-emerald-400 to-teal-600 flex items-center justify-center text-white text-3xl font-bold shadow-md">
+                                PV
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-900 dark:text-white">Phillbert Vaustino</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">SMP BPK Penabur Holis</p>
+                            </div>
+                            <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex justify-around text-xs text-slate-600 dark:text-slate-400">
+                                <div>
+                                    <div class="font-bold text-slate-900 dark:text-white text-base">3+</div>
+                                    <span>Penghargaan</span>
+                                </div>
+                                <div class="w-px bg-slate-200 dark:bg-slate-800"></div>
+                                <div>
+                                    <div class="font-bold text-slate-900 dark:text-white text-base">2026</div>
+                                    <span>Lulus SMP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="scroll-mt-24 space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">
+                        <i class="fa-solid fa-trophy text-amber-500"></i> Prestasi & Kompetisi
+                    </h2>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Pencapaian dalam bidang akademik dan turnamen esports.</p>
+                </div>
+                <!-- Filter Buttons -->
+                <div class="flex gap-2 p-1 bg-slate-200/60 dark:bg-slate-900 rounded-xl text-xs font-medium w-fit">
+                    <button id="filter-all" onclick="filterAchievements('all')" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 shadow-sm text-slate-900 dark:text-white transition-all">Semua</button>
+                    <button id="filter-math" onclick="filterAchievements('math')" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">Matematika</button>
+                    <button id="filter-gaming" onclick="filterAchievements('gaming')" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">Esports</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="achievements-grid">
+                <!-- Achievement Item 1 -->
+                <div class="achievement-card math bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:border-emerald-500/50 transition-all group">
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-amber-500/10 group-hover:text-amber-500 transition-all">
+                        <i class="fa-solid fa-medal text-lg"></i>
+                    </div>
+                    <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">2025 - 2026</span>
+                    <h3 class="font-bold text-slate-900 dark:text-white text-base mt-1">Silver Medal</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">IKMC (International Kangaroo Mathematics Contest)</p>
+                </div>
+
+                <!-- Achievement Item 2 -->
+                <div class="achievement-card math bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:border-emerald-500/50 transition-all group">
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-amber-700/10 group-hover:text-amber-700 transition-all">
+                        <i class="fa-solid fa-award text-lg"></i>
+                    </div>
+                    <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">2023 - 2024</span>
+                    <h3 class="font-bold text-slate-900 dark:text-white text-base mt-1">Bronze Medal</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">IKMC (International Kangaroo Mathematics Contest)</p>
+                </div>
+
+                <!-- Achievement Item 3 -->
+                <div class="achievement-card gaming bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:border-emerald-500/50 transition-all group">
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-blue-500/10 group-hover:text-blue-500 transition-all">
+                        <i class="fa-solid fa-gamepad text-lg"></i>
+                    </div>
+                    <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">2026</span>
+                    <h3 class="font-bold text-slate-900 dark:text-white text-base mt-1">Juara 2 Turnamen MLBB</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Turnamen Mobile Legends Bina Bakti 2</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="scroll-mt-24 space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">
+                    <i class="fa-solid fa-gears text-emerald-500"></i> Keahlian & Keterampilan
+                </h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Kemampuan logika, teknis, dan hobi yang ditekuni.</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <!-- Skill Badge 1 -->
+                <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center gap-3 hover:shadow-md transition-all">
+                    <div class="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-900 dark:text-white">Math & Fisika</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Akademik Logika</p>
+                    </div>
+                </div>
+
+                <!-- Skill Badge 2 -->
+                <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center gap-3 hover:shadow-md transition-all">
+                    <div class="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-head-side-virus"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-900 dark:text-white">Logical Thinking</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Analitis</p>
+                    </div>
+                </div>
+
+                <!-- Skill Badge 3 -->
+                <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center gap-3 hover:shadow-md transition-all">
+                    <div class="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-900 dark:text-white">Perakitan PC</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Hardware</p>
+                    </div>
+                </div>
+
+                <!-- Skill Badge 4 -->
+                <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center gap-3 hover:shadow-md transition-all">
+                    <div class="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-bug"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-900 dark:text-white">Troubleshooting</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Perbaikan Teknis</p>
+                    </div>
+                </div>
+
+                <!-- Skill Badge 5 -->
+                <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center gap-3 hover:shadow-md transition-all">
+                    <div class="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-900 dark:text-white">Competitive Gaming</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Esports & Strategi</p>
+                    </div>
+                </div>
+
+                <!-- Skill Badge 6 -->
+                <div class="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center gap-3 hover:shadow-md transition-all">
+                    <div class="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate-900 dark:text-white">Technical Skills</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Komputer & IT</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="scroll-mt-24 space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">
+                    <i class="fa-solid fa-graduation-cap text-emerald-500"></i> Riwayat Pendidikan
+                </h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Jejak pendidikan formal yang telah ditempuh.</p>
+            </div>
+
+            <!-- Timeline -->
+            <div class="relative border-l-2 border-slate-200 dark:border-slate-800 ml-3 space-y-8 pl-6">
+                <!-- Timeline item 1 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-4 border-slate-50 dark:border-slate-950 group-hover:scale-125 transition-all"></div>
+                    <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Lulus 2026</span>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-0.5">SMP BPK Penabur Holis</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Sekolah Menengah Pertama</p>
+                </div>
+
+                <!-- Timeline item 2 -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-700 border-4 border-slate-50 dark:border-slate-950 group-hover:scale-125 transition-all"></div>
+                    <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">Lulus 2023</span>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-0.5">SD Holy Kids</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Sekolah Dasar</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="scroll-mt-24 space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2.5">
+                    <i class="fa-solid fa-address-book text-emerald-500"></i> Informasi Kontak
+                </h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Jangan ragu untuk menghubungi saya melalui saluran berikut.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Phone -->
+                <div onclick="copyToClipboard('+62895638897799', 'Nomor telepon disalin!')" class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer hover:border-emerald-500/50 transition-all flex items-center justify-between group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block font-medium">Telepon / WA</span>
+                            <span class="text-sm font-semibold text-slate-900 dark:text-white">+62 895 6388 97799</span>
+                        </div>
+                    </div>
+                    <i class="fa-regular fa-copy text-slate-400 group-hover:text-emerald-500 transition-colors"></i>
+                </div>
+
+                <!-- Email -->
+                <div onclick="copyToClipboard('Phillbertv2@gmail.com', 'Email disalin!')" class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer hover:border-emerald-500/50 transition-all flex items-center justify-between group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block font-medium">Email</span>
+                            <span class="text-sm font-semibold text-slate-900 dark:text-white">Phillbertv2@gmail.com</span>
+                        </div>
+                    </div>
+                    <i class="fa-regular fa-copy text-slate-400 group-hover:text-emerald-500 transition-colors"></i>
+                </div>
+
+                <!-- Address -->
+                <div onclick="copyToClipboard('TKI 1 Blok O No 169', 'Alamat disalin!')" class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer hover:border-emerald-500/50 transition-all flex items-center justify-between group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block font-medium">Alamat</span>
+                            <span class="text-sm font-semibold text-slate-900 dark:text-white">TKI 1 Blok O No 169</span>
+                        </div>
+                    </div>
+                    <i class="fa-regular fa-copy text-slate-400 group-hover:text-emerald-500 transition-colors"></i>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-6 bg-white dark:bg-slate-950 transition-colors">
+        <div class="max-w-5xl mx-auto px-4 text-center text-xs text-slate-500 dark:text-slate-400">
+            <p>&copy; 2026 Phillbert Vaustino. Minimalist Personal Web Portfolio.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        function updateThemeUI() {
+            if (document.documentElement.classList.contains('dark')) {
+                darkIcon.classList.add('hidden');
+                lightIcon.classList.remove('hidden');
+            } else {
+                darkIcon.classList.remove('hidden');
+                lightIcon.classList.add('hidden');
+            }
+        }
+
+        updateThemeUI();
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            updateThemeUI();
+        });
+
+        // Mobile Nav Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Copy to Clipboard Utility
+        function copyToClipboard(text, message) {
+            const tempInput = document.createElement('input');
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            showToast(message || 'Teks berhasil disalin!');
+        }
+
+        // Toast Notification Function
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            
+            toastMsg.innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Filter Achievements Logic
+        function filterAchievements(category) {
+            const cards = document.querySelectorAll('.achievement-card');
+            const buttons = ['all', 'math', 'gaming'];
+
+            buttons.forEach(btn => {
+                const el = document.getElementById('filter-' + btn);
+                if (btn === category) {
+                    el.className = "px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 shadow-sm text-slate-900 dark:text-white transition-all";
+                } else {
+                    el.className = "px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all";
+                }
+            });
+
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
